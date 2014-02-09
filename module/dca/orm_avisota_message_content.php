@@ -34,7 +34,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['article'] = array
 	'eval'             => array('mandatory' => true, 'submitOnChange' => true),
 	'wizard'           => array
 	(
-		array('Avisota\Contao\DataContainer\MessageContent', 'editArticleAlias')
+		array('Avisota\Contao\Core\DataContainer\MessageContent', 'editArticleAlias')
 	),
 	'field'            => array(
 		'type'   => 'serialized',
