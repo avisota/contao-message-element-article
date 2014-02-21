@@ -17,7 +17,11 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['article'] = array(
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['articleId'] = array(
 	'Article',
 	'Please choose the article to include.'
+);
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['articleFull'] = array(
+	'Show full article',
+	'Show the full article, instead of article teaser.'
 );

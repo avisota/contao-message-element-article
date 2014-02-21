@@ -18,3 +18,8 @@
  * Message elements
  */
 $GLOBALS['TL_MCE']['includes'][] = 'article';
+
+/**
+ * Events
+ */
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Element\Article\DefaultRenderer';

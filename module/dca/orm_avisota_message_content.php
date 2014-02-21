@@ -13,7 +13,6 @@
  * @filesource
  */
 
-
 /**
  * Table orm_avisota_message_content
  * Entity Avisota\Contao:MessageContent
@@ -21,23 +20,37 @@
 $GLOBALS['TL_DCA']['orm_avisota_message_content']['metapalettes']['article'] = array
 (
 	'type'    => array('type', 'cell', 'headline'),
-	'include' => array('article'),
+	'include' => array('articleId', 'articleFull'),
 	'expert'  => array(':hide', 'cssID', 'space')
 );
 
-$GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['article'] = array
+$GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleId']   = array
 (
-	'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['articleAlias'],
-	'exclude'          => true,
-	'inputType'        => 'select',
-	'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-article-options'),
-	'eval'             => array('mandatory' => true, 'submitOnChange' => true),
-	'wizard'           => array
-	(
-		array('Avisota\Contao\Message\Core\DataContainer\MessageContent', 'editArticleAlias')
+	'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['articleId'],
+	'exclude'   => true,
+	'inputType' => 'selectri',
+	'eval'      => array(
+		'min'  => 1,
+		'data' => function () {
+				/** @var SelectriContaoTableDataFactory $data */
+				$data = SelectriContaoTableDataFactory::create();
+				$data->setItemTable('tl_article');
+				$data->getConfig()
+					->setItemSearchColumns(array('title'));
+				$data->getConfig()
+					->setItemConditionExpr('tstamp > 0');
+				return $data;
+			},
 	),
-	'field'            => array(
-		'type'   => 'serialized',
-		'length' => 65532
+	'field'     => array(
+		'type'     => 'integer',
+		'nullable' => true,
 	),
+);
+$GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleFull'] = array
+(
+	'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['articleFull'],
+	'default'   => false,
+	'exclude'   => true,
+	'inputType' => 'checkbox',
 );
