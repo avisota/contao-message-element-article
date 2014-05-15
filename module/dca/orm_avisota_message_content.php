@@ -19,9 +19,10 @@
  */
 $GLOBALS['TL_DCA']['orm_avisota_message_content']['metapalettes']['article'] = array
 (
-	'type'    => array('type', 'cell', 'headline'),
-	'include' => array('articleId', 'articleFull'),
-	'expert'  => array(':hide', 'cssID', 'space')
+	'type'      => array('type', 'cell', 'headline'),
+	'include'   => array('articleId', 'articleFull'),
+	'expert'    => array(':hide', 'cssID', 'space'),
+	'published' => array('invisible'),
 );
 
 $GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleId']   = array
@@ -32,15 +33,15 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleId']   = arr
 	'eval'      => array(
 		'min'  => 1,
 		'data' => function () {
-				/** @var SelectriContaoTableDataFactory $data */
-				$data = SelectriContaoTableDataFactory::create();
-				$data->setItemTable('tl_article');
-				$data->getConfig()
-					->setItemSearchColumns(array('title'));
-				$data->getConfig()
-					->setItemConditionExpr('tstamp > 0');
-				return $data;
-			},
+			/** @var SelectriContaoTableDataFactory $data */
+			$data = SelectriContaoTableDataFactory::create();
+			$data->setItemTable('tl_article');
+			$data->getConfig()
+				->setItemSearchColumns(array('title'));
+			$data->getConfig()
+				->setItemConditionExpr('tstamp > 0');
+			return $data;
+		},
 	),
 	'field'     => array(
 		'type'     => 'integer',
