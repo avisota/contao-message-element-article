@@ -26,7 +26,7 @@
 		"contao-community-alliance/composer-installer": "~1.6",
 		"avisota/contao-message": "~2.0",
 		"avisota/contao-message-element-headline": "~2.0",
-		"backboneit/contao-selectri": "~1.0"
+		"backboneit/contao-selectri": "~2.0"
 	},
 	"require-dev":{
 		"phpunit/phpunit":"3.7.*",
