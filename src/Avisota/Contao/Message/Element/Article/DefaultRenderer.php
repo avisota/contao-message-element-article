@@ -13,7 +13,6 @@
  * @filesource
  */
 
-
 namespace Avisota\Contao\Message\Element\Article;
 
 use Avisota\Contao\Core\Message\Renderer;
@@ -28,57 +27,56 @@ use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GetArticleEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-
 /**
  * Class DefaultRenderer
  */
 class DefaultRenderer implements EventSubscriberInterface
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	static public function getSubscribedEvents()
-	{
-		return array(
-			AvisotaMessageEvents::RENDER_MESSAGE_CONTENT => 'renderContent',
-		);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    static public function getSubscribedEvents()
+    {
+        return array(
+            AvisotaMessageEvents::RENDER_MESSAGE_CONTENT => 'renderContent',
+        );
+    }
 
-	/**
-	 * Render a single message content element.
-	 *
-	 * @param MessageContent     $content
-	 * @param RecipientInterface $recipient
-	 *
-	 * @return string
-	 */
-	public function renderContent(RenderMessageContentEvent $event)
-	{
-		$content = $event->getMessageContent();
+    /**
+     * Render a single message content element.
+     *
+     * @param MessageContent     $content
+     * @param RecipientInterface $recipient
+     *
+     * @return string
+     */
+    public function renderContent(RenderMessageContentEvent $event)
+    {
+        $content = $event->getMessageContent();
 
-		if ($content->getType() != 'article' || $event->getRenderedContent()) {
-			return;
-		}
+        if ($content->getType() != 'article' || $event->getRenderedContent()) {
+            return;
+        }
 
-		/** @var EntityAccessor $entityAccessor */
-		$entityAccessor = $GLOBALS['container']['doctrine.orm.entityAccessor'];
+        /** @var EntityAccessor $entityAccessor */
+        $entityAccessor = $GLOBALS['container']['doctrine.orm.entityAccessor'];
 
-		$getArticleEvent = new GetArticleEvent(
-			$content->getArticleId(),
-			!$content->getArticleFull(),
-			$content->getCell()
-		);
+        $getArticleEvent = new GetArticleEvent(
+            $content->getArticleId(),
+            !$content->getArticleFull(),
+            $content->getCell()
+        );
 
-		/** @var EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
-		$eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GET_ARTICLE, $getArticleEvent);
+        /** @var EventDispatcher $eventDispatcher */
+        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+        $eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GET_ARTICLE, $getArticleEvent);
 
-		$context = $entityAccessor->getProperties($content);
-		$context['article'] = $getArticleEvent->getArticle();
+        $context            = $entityAccessor->getProperties($content);
+        $context['article'] = $getArticleEvent->getArticle();
 
-		$template = new \TwigTemplate('avisota/message/renderer/default/mce_article', 'html');
-		$buffer   = $template->parse($context);
+        $template = new \TwigTemplate('avisota/message/renderer/default/mce_article', 'html');
+        $buffer   = $template->parse($context);
 
-		$event->setRenderedContent($buffer);
-	}
+        $event->setRenderedContent($buffer);
+    }
 }
