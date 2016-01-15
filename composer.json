@@ -50,12 +50,12 @@
     "extra": {
         "contao": {
             "sources": {
-                "module": "system/modules/avisota-message-element-article"
+                "contao": "system/modules/avisota-message-element-article"
             },
             "transifex": {
                 "project": "avisota-contao",
                 "prefix": "contao-message-element-article-",
-                "languages_cto": "module/languages",
+                "languages_cto": "contao/languages",
                 "languages_tx": ".tx"
             }
         },
