@@ -1,0 +1,26 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:02:23+02:00" original="orm_avisota_message_content" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="orm_avisota_message_content.articleId.0">
+        <source>Article</source>
+        <target>Artitgel</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.articleId.1">
+        <source>Please choose the article to include.</source>
+        <target>Tscherna l'artitgel per includer.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.articleFull.0">
+        <source>Show full article</source>
+        <target>Mussar l'entir artitgel</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.articleFull.1">
+        <source>Show the full article, instead of article teaser.</source>
+        <target>Mussar l'entir artitgel empè dal teaser da l'artitgel.</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
