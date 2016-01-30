@@ -3,10 +3,12 @@
     <body>
       <trans-unit id="MCE.article.0">
         <source>Article</source>
+        <target>Artigo</target>
         
       </trans-unit>
       <trans-unit id="MCE.article.1">
         <source>Includes another article.</source>
+        <target>Inclui um outro artigo.</target>
         
       </trans-unit>
     </body>
