@@ -25,7 +25,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content']['metapalettes']['article'] = a
     'published' => array('invisible'),
 );
 
-$GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleId']   = array
+$GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleId'] = array
 (
     'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['articleId'],
     'exclude'   => true,
@@ -48,6 +48,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleId']   = arr
         'nullable' => true,
     ),
 );
+
 $GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleFull'] = array
 (
     'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['articleFull'],
