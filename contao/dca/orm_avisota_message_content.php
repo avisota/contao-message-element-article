@@ -32,16 +32,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleId'] = array
     'inputType' => 'selectri',
     'eval'      => array(
         'min'  => 1,
-        'data' => function () {
-            /** @var SelectriContaoTableDataFactory $data */
-            $data = SelectriContaoTableDataFactory::create();
-            $data->setItemTable('tl_article');
-            $data->getConfig()
-                ->setItemSearchColumns(array('title'));
-            $data->getConfig()
-                ->setItemConditionExpr('tstamp > 0');
-            return $data;
-        },
+        'data' => Avisota\Contao\Message\Element\Article\DataContainer\ArticleIdField::getDataForSelectri(),
     ),
     'field'     => array(
         'type'     => 'integer',
