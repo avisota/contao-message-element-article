@@ -66,6 +66,8 @@ class DefaultRenderer implements EventSubscriberInterface
      */
     public function renderContent(RenderMessageContentEvent $event)
     {
+        global $container;
+
         $content = $event->getMessageContent();
 
         if ($content->getType() != 'article' || $event->getRenderedContent()) {
@@ -73,7 +75,7 @@ class DefaultRenderer implements EventSubscriberInterface
         }
 
         /** @var EntityAccessor $entityAccessor */
-        $entityAccessor = $GLOBALS['container']['doctrine.orm.entityAccessor'];
+        $entityAccessor = $container['doctrine.orm.entityAccessor'];
 
         $getArticleEvent = new GetArticleEvent(
             $content->getArticleId(),
@@ -82,7 +84,7 @@ class DefaultRenderer implements EventSubscriberInterface
         );
 
         /** @var EventDispatcher $eventDispatcher */
-        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+        $eventDispatcher = $container['event-dispatcher'];
         $eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GET_ARTICLE, $getArticleEvent);
 
         $context            = $entityAccessor->getProperties($content);
