@@ -85,6 +85,16 @@ class DefaultRenderer implements EventSubscriberInterface
             $content->getCell()
         );
 
+        if (!$content->getArticleFull()) {
+            $article = \ArticleModel::findByPk($content->getArticleId());
+            $article->showTeaser = 1;
+
+            global $objPage;
+            if (!$objPage) {
+                $objPage = $article->getRelated('pid');
+                $objPage->loadDetails();
+            }
+        }
 
         /** @var EventDispatcher $eventDispatcher */
         $eventDispatcher = $container['event-dispatcher'];
