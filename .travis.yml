@@ -24,10 +24,9 @@ before_install:
 
 install:
   - if [ -n "GITHUB_TOKEN" ]; then composer config github-oauth.github.com ${GITHUB_TOKEN}; fi;
-  - travis_retry if [ -d vendor ]; then ls vendor; fi;
   - travis_retry composer self-update && composer --version
   - travis_retry composer require contao/core $CONTAO_VERSION --no-update
-  - travis_retry composer update --prefer-dist --no-interaction -vvv
+  - travis_retry composer update --prefer-dist --no-interaction
 
 script: ant -keep-going
 
