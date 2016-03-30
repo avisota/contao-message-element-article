@@ -17,7 +17,6 @@ namespace Avisota\Contao\Message\Element\Article\DataContainer;
 
 use Hofff\Contao\Selectri\Model\Flat\SQLListDataFactory;
 
-
 /**
  * Class ArticleIdField
  *
