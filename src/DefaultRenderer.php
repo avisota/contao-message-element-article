@@ -53,7 +53,9 @@ class DefaultRenderer implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            AvisotaMessageEvents::RENDER_MESSAGE_CONTENT => 'renderContent',
+            AvisotaMessageEvents::RENDER_MESSAGE_CONTENT => array(
+                array('renderContent'),
+            ),
         );
     }
 
@@ -86,7 +88,7 @@ class DefaultRenderer implements EventSubscriberInterface
         );
 
         if (!$content->getArticleFull()) {
-            $article = \ArticleModel::findByPk($content->getArticleId());
+            $article             = \ArticleModel::findByPk($content->getArticleId());
             $article->showTeaser = 1;
 
             global $objPage;
