@@ -16,12 +16,14 @@
 namespace Avisota\Contao\Message\Element\Article;
 
 use Avisota\Contao\Core\Message\Renderer;
+use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\RenderMessageContentEvent;
 use Contao\Doctrine\ORM\Entity;
 use Contao\Doctrine\ORM\EntityAccessor;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GetArticleEvent;
+use Pimple;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -51,7 +53,9 @@ class DefaultRenderer implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            AvisotaMessageEvents::RENDER_MESSAGE_CONTENT => 'renderContent',
+            AvisotaMessageEvents::RENDER_MESSAGE_CONTENT => array(
+                array('renderContent'),
+            ),
         );
     }
 
@@ -82,6 +86,17 @@ class DefaultRenderer implements EventSubscriberInterface
             !$content->getArticleFull(),
             $content->getCell()
         );
+
+        if (!$content->getArticleFull()) {
+            $article             = \ArticleModel::findByPk($content->getArticleId());
+            $article->showTeaser = 1;
+
+            global $objPage;
+            if (!$objPage) {
+                $objPage = $article->getRelated('pid');
+                $objPage->loadDetails();
+            }
+        }
 
         /** @var EventDispatcher $eventDispatcher */
         $eventDispatcher = $container['event-dispatcher'];

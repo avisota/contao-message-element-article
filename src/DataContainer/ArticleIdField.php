@@ -15,7 +15,7 @@
 
 namespace Avisota\Contao\Message\Element\Article\DataContainer;
 
-use SelectriContaoTableDataFactory;
+use Hofff\Contao\Selectri\Model\Flat\SQLListDataFactory;
 
 /**
  * Class ArticleIdField
@@ -25,18 +25,16 @@ use SelectriContaoTableDataFactory;
 class ArticleIdField
 {
     /**
-     * @return SelectriContaoTableDataFactory
+     * @return SQLListDataFactory
      */
     public static function getDataForSelectri()
     {
-        /** @var SelectriContaoTableDataFactory $data */
-        $data = SelectriContaoTableDataFactory::create();
-        $data->setItemTable('tl_article');
-        $data->getConfig()
-            ->setItemSearchColumns(array('title'));
-        $data->getConfig()
-            ->setItemConditionExpr('tstamp > 0');
+        $dataFactory = new SQLListDataFactory();
+        $dataFactory->getConfig()->setTable('tl_article');
+        $dataFactory->getConfig()->addColumns([ 'title', 'id' ]);
+        $dataFactory->getConfig()->addSearchColumns('title');
+        $dataFactory->getConfig()->setConditionExpr('tstamp > 0');
 
-        return $data;
+        return $dataFactory;
     }
 }
