@@ -74,7 +74,7 @@ class DefaultRenderer implements EventSubscriberInterface
 
         $content = $event->getMessageContent();
 
-        if ($content->getType() != 'article' || $event->getRenderedContent()) {
+        if ($content->getType() != 'article' || $event->getRenderedContent() || !$content->getArticleId()) {
             return;
         }
 
