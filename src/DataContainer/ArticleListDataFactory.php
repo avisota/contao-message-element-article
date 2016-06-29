@@ -15,6 +15,7 @@
 
 namespace Avisota\Contao\Message\Element\Article\DataContainer;
 
+use Avisota\Contao\Selectri\DataContainer\DatabaseTrait;
 use Contao\Database;
 use Hofff\Contao\Selectri\Model\Data;
 use Hofff\Contao\Selectri\Model\DataFactory;
@@ -27,10 +28,7 @@ use Hofff\Contao\Selectri\Widget;
  */
 class ArticleListDataFactory implements DataFactory
 {
-    /**
-     * @var Database
-     */
-    protected $database;
+    use DatabaseTrait;
 
     /**
      * ArticleListDataFactory constructor.
@@ -61,21 +59,5 @@ class ArticleListDataFactory implements DataFactory
     public function createData(Widget $widget = null)
     {
         return new ArticleListData($widget, $this->getDatabase());
-    }
-
-    /**
-     * @return Database
-     */
-    public function getDatabase()
-    {
-        return $this->database;
-    }
-
-    /**
-     * @param Database $database
-     */
-    protected function setDatabase($database)
-    {
-        $this->database = $database;
     }
 }

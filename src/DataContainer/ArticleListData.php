@@ -15,6 +15,7 @@
 
 namespace Avisota\Contao\Message\Element\Article\DataContainer;
 
+use Avisota\Contao\Selectri\DataContainer\DatabaseTrait;
 use Avisota\Contao\Selectri\Model\Tree\SQLAdjacencyTreeDataConfigWithItems;
 use Avisota\Contao\Selectri\Model\Tree\SQLAdjacencyTreeDataWithItems;
 use Contao\BackendUser;
@@ -32,11 +33,8 @@ use Hofff\Contao\Selectri\Widget;
  */
 class ArticleListData extends AbstractData
 {
-    /**
-     * @var Database
-     */
-    protected $database;
-
+    use DatabaseTrait;
+    
     /**
      * ArticleListData constructor.
      *
@@ -240,25 +238,5 @@ class ArticleListData extends AbstractData
     public function isBrowsable()
     {
         return true;
-    }
-
-    /**
-     * Get the Database.
-     *
-     * @return Database
-     */
-    public function getDatabase()
-    {
-        return $this->database;
-    }
-
-    /**
-     * Set the database.
-     *
-     * @param Database $database
-     */
-    protected function setDatabase($database)
-    {
-        $this->database = $database;
     }
 }
