@@ -34,7 +34,7 @@ use Hofff\Contao\Selectri\Widget;
 class ArticleListData extends AbstractData
 {
     use DatabaseTrait;
-    
+
     /**
      * ArticleListData constructor.
      *
