@@ -52,6 +52,12 @@ class ArticleListData extends AbstractData
 
     /**
      * @see \Hofff\Contao\Selectri\Model\Data::browseFrom()
+     *
+     * @param null $key
+     *
+     * @return array
+     *
+     * @throws SelectriException
      */
     public function browseFrom($key = null)
     {
