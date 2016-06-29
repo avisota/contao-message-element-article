@@ -44,16 +44,16 @@ class ArticleListContentController
     /**
      * Get buttons.
      *
-     * @param $id
+     * @param $articleId
      *
      * @return string
      */
-    protected function getButtons($id)
+    protected function getButtons($articleId)
     {
         System::loadLanguageFile('tl_article');
 
-        $buttons = self::getModalEditButton($id);
-        $buttons .= self::getModalShowButton($id);
+        $buttons = self::getModalEditButton($articleId);
+        $buttons .= self::getModalShowButton($articleId);
 
         return $buttons;
     }
@@ -61,16 +61,16 @@ class ArticleListContentController
     /**
      * Get modal edit button.
      *
-     * @param $id
+     * @param $articleId
      *
      * @return string
      */
-    protected function getModalEditButton($id)
+    protected function getModalEditButton($articleId)
     {
         $urlParams = array(
             array(
                 'name'  => 'id',
-                'value' => $id
+                'value' => $articleId
             ),
             array(
                 'name'  => 'popup',
@@ -82,8 +82,8 @@ class ArticleListContentController
 
         return '<a ' .
                'href="' . self::getBackendUrl($urlParams) . '" ' .
-               'title="' . self::getTitle($label, $id) . '" ' .
-               'onclick="' . self::getOnClickModal($label, $id) . '" ' .
+               'title="' . self::getTitle($label, $articleId) . '" ' .
+               'onclick="' . self::getOnClickModal($label, $articleId) . '" ' .
                'class="edit">' .
                \Image::getHtml('edit.gif', $GLOBALS['TL_LANG']['tl_article']['edit']) .
                '</a> ';
@@ -92,11 +92,11 @@ class ArticleListContentController
     /**
      * Get modal show button.
      *
-     * @param $id
+     * @param $articleId
      *
      * @return string
      */
-    protected function getModalShowButton($id)
+    protected function getModalShowButton($articleId)
     {
         $urlParams = array(
             array(
@@ -105,7 +105,7 @@ class ArticleListContentController
             ),
             array(
                 'name'  => 'id',
-                'value' => $id
+                'value' => $articleId
             ),
             array(
                 'name'  => 'popup',
@@ -117,8 +117,8 @@ class ArticleListContentController
 
         return '<a ' .
                'href="' . self::getBackendUrl($urlParams) . '" ' .
-               'title="' . self::getTitle($label, $id) . '" ' .
-               'onclick="' . self::getOnClickModal($label, $id) . '" ' .
+               'title="' . self::getTitle($label, $articleId) . '" ' .
+               'onclick="' . self::getOnClickModal($label, $articleId) . '" ' .
                'class="edit">' .
                \Image::getHtml('show.gif', $GLOBALS['TL_LANG']['tl_article']['edit']) .
                '</a> ';
@@ -153,13 +153,13 @@ class ArticleListContentController
      * Get title.
      *
      * @param $label
-     * @param $id
+     * @param $articleId
      *
      * @return string
      */
-    protected function getTitle($label, $id)
+    protected function getTitle($label, $articleId)
     {
-        return specialchars(sprintf($label, $id));
+        return specialchars(sprintf($label, $articleId));
     }
 
     /**

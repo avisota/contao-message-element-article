@@ -45,6 +45,8 @@ class ArticleListDataFactory implements DataFactory
      *                      the DCA field the widget using this factory)
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function setParameters($params)
     {

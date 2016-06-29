@@ -91,6 +91,8 @@ class ArticleListController
      * @param $pid
      *
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     protected function getArticleNode($pid)
     {
@@ -109,7 +111,7 @@ class ArticleListController
 
     /**
      * Get nodes.
-     * 
+     *
      * @param array $keys
      * @param bool  $selectableOnly
      *
