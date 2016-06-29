@@ -55,7 +55,11 @@ class ArticleListData extends AbstractData
      */
     public function browseFrom($key = null)
     {
-        $treeData = new SQLAdjacencyTreeDataWithItems($this->getWidget(), $this->getDatabase(), $this->getTreeDataConfig());
+        $treeData = new SQLAdjacencyTreeDataWithItems(
+            $this->getWidget(),
+            $this->getDatabase(),
+            $this->getTreeDataConfig()
+        );
 
         return $treeData->browseFrom($key);
     }
