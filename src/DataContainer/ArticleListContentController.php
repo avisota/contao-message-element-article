@@ -166,14 +166,14 @@ class ArticleListContentController
      * Get on click for modal.
      *
      * @param $label
-     * @param $id
+     * @param $articleId
      *
      * @return string
      */
-    protected function getOnClickModal($label, $id)
+    protected function getOnClickModal($label, $articleId)
     {
         return 'Backend.openModalIframe({\'width\':768,\'title\':\'' .
-               specialchars(str_replace("'", "\\'", sprintf($label, $id))) .
+               specialchars(str_replace("'", "\\'", sprintf($label, $articleId))) .
                '\',\'url\':this.href});return false';
     }
 }
