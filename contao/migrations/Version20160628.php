@@ -67,18 +67,20 @@ class Version20160628 extends AbstractMigration
     protected function migrateFromStringToArray($column)
     {
         $database = Database::getInstance();
-        $result   = $database->prepare("SELECT * FROM orm_avisota_message_content")
+        $result   = $database->prepare("SELECT * FROM orm_avisota_message_content WHERE $column>0")
             ->execute();
+
+        if ($result->count() < 1) {
+            return;
+        }
 
         while ($result->next()) {
             if (is_array(unserialize($result->$column))) {
                 continue;
             }
 
-            $result->$column = serialize((array) $result->$column);
-
             $database->prepare("UPDATE orm_avisota_message_content %s WHERE id=?")
-                ->set(array($column => $result->$column))
+                ->set(array($column => serialize((array) $result->$column)))
                 ->execute($result->id);
         }
     }
