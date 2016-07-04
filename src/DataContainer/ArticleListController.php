@@ -160,6 +160,13 @@ class ArticleListController
         return $nodes;
     }
 
+    /**
+     * Remove the provider index from key, to save the id only.
+     *
+     * @param array $keys
+     *
+     * @return array
+     */
     public function filter(array $keys)
     {
         $listData = new SQLListData(
