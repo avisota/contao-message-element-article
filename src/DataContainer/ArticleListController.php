@@ -22,6 +22,7 @@ use ContaoCommunityAlliance\DcGeneral\Data\DefaultDataProvider;
 use Hofff\Contao\Selectri\Model\Data;
 use Hofff\Contao\Selectri\Model\Flat\SQLListData;
 use Hofff\Contao\Selectri\Model\Flat\SQLListDataConfig;
+use Hofff\Contao\Selectri\Model\Flat\SQLListNode;
 use Hofff\Contao\Selectri\Util\Icons;
 use Hofff\Contao\Selectri\Util\SQLUtil;
 
@@ -102,7 +103,21 @@ class ArticleListController
             $this->getListDataConfig($pid)
         );
 
-        list($level, $start) = $listData->browseFrom();
+        list($articleLevel, $start) = $listData->browseFrom();
+
+        $level = new \ArrayIterator();
+        /** @var SQLListNode $current */
+        while ($current = $articleLevel->current()) {
+            $node = $current->getData();
+
+            $node['_key'] = 'tl_article::' . $node['_key'];
+
+            $listNode = new SQLListNode($listData, $node);
+
+            $level->append($listNode);
+
+            $articleLevel->next();
+        }
 
         ob_start();
         include Controller::getTemplate('avisota_selectri_with_items');
@@ -125,7 +140,24 @@ class ArticleListController
             $this->getListDataConfig()
         );
 
-        return $listData->getNodes($keys, $selectableOnly);
+
+        $articleNodes = $listData->getNodes($keys, $selectableOnly);
+
+        $nodes = new \ArrayIterator();
+        /** @var SQLListNode $current */
+        while ($current = $articleNodes->current()) {
+            $node = $current->getData();
+
+            $node['_key'] = 'tl_article::' . $node['_key'];
+
+            $listNode = new SQLListNode($listData, $node);
+
+            $nodes->append($listNode);
+
+            $articleNodes->next();
+        }
+
+        return $nodes;
     }
 
     public function filter(array $keys)
@@ -136,7 +168,12 @@ class ArticleListController
             $this->getListDataConfig()
         );
 
-        return $listData->filter($keys);
+        $filterKeys = array();
+        foreach ($keys as $key) {
+            array_push($filterKeys, explode('::', $key)[1]);
+        }
+
+        return $listData->filter($filterKeys);
     }
 
     /**
