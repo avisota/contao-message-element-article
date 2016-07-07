@@ -104,6 +104,10 @@ class ArticleListContentController
                 'value' => 'show'
             ),
             array(
+                'name'  => 'table',
+                'value' => 'tl_article'
+            ),
+            array(
                 'name'  => 'id',
                 'value' => $articleId
             ),
