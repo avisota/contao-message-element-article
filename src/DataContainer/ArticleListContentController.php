@@ -37,7 +37,7 @@ class ArticleListContentController
     {
         return sprintf(
             "<div style=\" float: right; margin-right: 64px; margin-top: 3px;\">%s</div>",
-            self::getButtons($node->getKey())
+            self::getButtons(explode('::', $node->getKey())[1])
         );
     }
 
