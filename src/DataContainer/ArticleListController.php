@@ -142,6 +142,9 @@ class ArticleListController
 
 
         $articleNodes = $listData->getNodes($keys, $selectableOnly);
+        if ($articleNodes instanceof \EmptyIterator) {
+            return $articleNodes;
+        }
 
         $nodes = new \ArrayIterator();
         /** @var SQLListNode $current */
