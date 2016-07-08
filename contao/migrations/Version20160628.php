@@ -26,7 +26,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Class Version20160628
  *
- * @package DoctrineMigrations\AvisotaMessageAnalyticsGa
+ * @package DoctrineMigrations\AvisotaMessageElementArticle
  */
 class Version20160628 extends AbstractMigration
 {
