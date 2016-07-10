@@ -16,16 +16,16 @@
 namespace Avisota\Contao\Message\Element\Article;
 
 use Avisota\Contao\Core\Message\Renderer;
-use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\RenderMessageContentEvent;
+use Contao\ArticleModel;
 use Contao\Doctrine\ORM\Entity;
 use Contao\Doctrine\ORM\EntityAccessor;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GetArticleEvent;
-use Pimple;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use TwigTemplate;
 
 /**
  * Class DefaultRenderer
@@ -65,8 +65,6 @@ class DefaultRenderer implements EventSubscriberInterface
      * @param RenderMessageContentEvent $event
      *
      * @return string
-     * @internal param MessageContent $content
-     * @internal param RecipientInterface $recipient
      */
     public function renderContent(RenderMessageContentEvent $event)
     {
@@ -74,39 +72,53 @@ class DefaultRenderer implements EventSubscriberInterface
 
         $content = $event->getMessageContent();
 
-        if ($content->getType() != 'article' || $event->getRenderedContent()) {
+        if ($content->getType() != 'article' || $event->getRenderedContent() || !$content->getArticleId()) {
             return;
         }
 
         /** @var EntityAccessor $entityAccessor */
         $entityAccessor = $container['doctrine.orm.entityAccessor'];
 
-        $getArticleEvent = new GetArticleEvent(
-            $content->getArticleId(),
-            !$content->getArticleFull(),
-            $content->getCell()
-        );
-
-        if (!$content->getArticleFull()) {
-            $article             = \ArticleModel::findByPk($content->getArticleId());
-            $article->showTeaser = 1;
-
-            global $objPage;
-            if (!$objPage) {
-                $objPage = $article->getRelated('pid');
-                $objPage->loadDetails();
-            }
-        }
-
         /** @var EventDispatcher $eventDispatcher */
         $eventDispatcher = $container['event-dispatcher'];
-        $eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GET_ARTICLE, $getArticleEvent);
 
-        $context            = $entityAccessor->getProperties($content);
-        $context['article'] = $getArticleEvent->getArticle();
+        $articles = array();
+        foreach ($content->getArticleId() as $articleId) {
+            if (empty($articleId)) {
+                continue;
+            }
 
-        $template = new \TwigTemplate('avisota/message/renderer/default/mce_article', 'html');
-        $buffer   = $template->parse($context);
+            $getArticleEvent = new GetArticleEvent(
+                $articleId,
+                !$content->getArticleFull(),
+                $content->getCell()
+            );
+
+            if (!$content->getArticleFull()) {
+                $article             = ArticleModel::findByPk($articleId);
+                $article->showTeaser = 1;
+
+                global $objPage;
+                if (!$objPage) {
+                    $objPage = $article->getRelated('pid');
+                    $objPage->loadDetails();
+                }
+            }
+
+            $eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GET_ARTICLE, $getArticleEvent);
+
+            $context            = $entityAccessor->getProperties($content);
+            $context['article'] = $getArticleEvent->getArticle();
+
+            array_push($articles, $context);
+        }
+
+
+        $buffer = '';
+        foreach ($articles as $article) {
+            $template = new TwigTemplate('avisota/message/renderer/default/mce_article', 'html');
+            $buffer .= $template->parse($article);
+        }
 
         $event->setRenderedContent($buffer);
     }
