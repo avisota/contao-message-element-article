@@ -85,7 +85,7 @@ class ArticleListContentController
                'title="' . self::getTitle($label, $articleId) . '" ' .
                'onclick="' . self::getOnClickModal($label, $articleId) . '" ' .
                'class="edit">' .
-               \Image::getHtml('edit.gif', $GLOBALS['TL_LANG']['tl_article']['edit']) .
+               \Image::getHtml('edit.gif', $GLOBALS['TL_LANG']['tl_article']['edit'][0]) .
                '</a> ';
     }
 
@@ -124,7 +124,7 @@ class ArticleListContentController
                'title="' . self::getTitle($label, $articleId) . '" ' .
                'onclick="' . self::getOnClickModal($label, $articleId) . '" ' .
                'class="edit">' .
-               \Image::getHtml('show.gif', $GLOBALS['TL_LANG']['tl_article']['edit']) .
+               \Image::getHtml('show.gif', $GLOBALS['TL_LANG']['tl_article']['show'][0]) .
                '</a> ';
     }
 
