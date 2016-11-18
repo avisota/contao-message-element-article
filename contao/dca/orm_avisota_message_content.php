@@ -34,6 +34,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content']['fields']['articleId'] = array
         'min'  => 1,
         'max'  => 99,
         'data' => 'Avisota\Contao\Message\Element\Article\DataContainer\ArticleListDataFactory',
+        'canonical' => true
     ),
     'field'     => array(
         'type'     => 'array',
