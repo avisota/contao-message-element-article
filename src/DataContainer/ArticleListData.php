@@ -46,8 +46,6 @@ class ArticleListData extends AbstractData
     {
         parent::__construct($widget);
         $this->setDatabase($database);
-
-
     }
 
     /**
