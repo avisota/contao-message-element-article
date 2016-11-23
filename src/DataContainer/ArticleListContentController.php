@@ -16,7 +16,6 @@
 namespace Avisota\Contao\Message\Element\Article\DataContainer;
 
 use Contao\System;
-use ContaoCommunityAlliance\DcGeneral\DC_General;
 use ContaoCommunityAlliance\UrlBuilder\UrlBuilder;
 use Hofff\Contao\Selectri\Model\Node;
 
