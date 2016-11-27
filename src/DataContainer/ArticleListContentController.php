@@ -50,10 +50,14 @@ class ArticleListContentController
      */
     protected function getButtons($articleId)
     {
+        global $container;
+
         System::loadLanguageFile('tl_article');
 
-        $buttons = self::getModalEditButton($articleId);
-        $buttons .= self::getModalShowButton($articleId);
+        $translator = $container['translator'];
+
+        $buttons = self::getModalEditButton($articleId, $translator);
+        $buttons .= self::getModalShowButton($articleId, $translator);
 
         return $buttons;
     }
@@ -63,9 +67,11 @@ class ArticleListContentController
      *
      * @param $articleId
      *
+     * @param $translator
+     *
      * @return string
      */
-    protected function getModalEditButton($articleId)
+    protected function getModalEditButton($articleId, $translator)
     {
         $urlParams = array(
             array(
@@ -78,14 +84,14 @@ class ArticleListContentController
             ),
         );
 
-        $label = $GLOBALS['TL_LANG']['tl_article']['edit'][1];
+        $label = $translator->translate('edit.1', 'tl_article');
 
         return '<a ' .
                'href="' . self::getBackendUrl($urlParams) . '" ' .
                'title="' . self::getTitle($label, $articleId) . '" ' .
                'onclick="' . self::getOnClickModal($label, $articleId) . '" ' .
                'class="edit">' .
-               \Image::getHtml('edit.gif', $GLOBALS['TL_LANG']['tl_article']['edit']) .
+               \Image::getHtml('edit.gif', $translator->translate('edit.0', 'tl_article')) .
                '</a> ';
     }
 
@@ -96,7 +102,7 @@ class ArticleListContentController
      *
      * @return string
      */
-    protected function getModalShowButton($articleId)
+    protected function getModalShowButton($articleId, $translator)
     {
         $urlParams = array(
             array(
@@ -117,14 +123,14 @@ class ArticleListContentController
             ),
         );
 
-        $label = $GLOBALS['TL_LANG']['tl_article']['show'][1];
+        $label = $translator->translate('show.1', 'tl_article');
 
         return '<a ' .
                'href="' . self::getBackendUrl($urlParams) . '" ' .
                'title="' . self::getTitle($label, $articleId) . '" ' .
                'onclick="' . self::getOnClickModal($label, $articleId) . '" ' .
                'class="edit">' .
-               \Image::getHtml('show.gif', $GLOBALS['TL_LANG']['tl_article']['edit']) .
+               \Image::getHtml('show.gif', $translator->translate('show.0', 'tl_article')) .
                '</a> ';
     }
 

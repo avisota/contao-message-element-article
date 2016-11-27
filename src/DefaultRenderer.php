@@ -15,11 +15,9 @@
 
 namespace Avisota\Contao\Message\Element\Article;
 
-use Avisota\Contao\Core\Message\Renderer;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\RenderMessageContentEvent;
 use Contao\ArticleModel;
-use Contao\Doctrine\ORM\Entity;
 use Contao\Doctrine\ORM\EntityAccessor;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GetArticleEvent;
