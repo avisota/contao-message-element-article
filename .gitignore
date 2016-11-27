@@ -15,3 +15,4 @@ nbproject/
 
 # dependencies
 vendor
+composer.lock
