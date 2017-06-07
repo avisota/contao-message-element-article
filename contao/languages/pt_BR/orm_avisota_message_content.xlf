@@ -4,20 +4,24 @@
       <trans-unit id="orm_avisota_message_content.articleId.0">
         <source>Article</source>
         <target>Artigo</target>
-        
+
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.articleId.1">
         <source>Please choose the article to include.</source>
         <target>Por favor escolha o artigo para incluir.</target>
-        
+
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.articleFull.0">
         <source>Show full article</source>
-        
+
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.articleFull.1">
         <source>Show the full article, instead of article teaser.</source>
-        
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.article.saveBeforeSelect">
+        <source>You must save this message content, before you can select article.</source>
+
       </trans-unit>
     </body>
   </file>

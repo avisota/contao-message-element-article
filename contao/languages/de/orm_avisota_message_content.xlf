@@ -4,22 +4,27 @@
       <trans-unit id="orm_avisota_message_content.articleId.0">
         <source>Article</source>
         <target>Artikel</target>
-        
+
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.articleId.1">
         <source>Please choose the article to include.</source>
         <target>Bite wählen Sie aus welcher Artikel eingebunden werden soll.</target>
-        
+
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.articleFull.0">
         <source>Show full article</source>
         <target>Ganzen Artikel anzeigen</target>
-        
+
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.articleFull.1">
         <source>Show the full article, instead of article teaser.</source>
         <target>Diese Einstellung legt fest dass der gesamte Artikel anstatt des Artikelteasers angezeigt wird.</target>
-        
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.article.saveBeforeSelect">
+        <source>You must save this message content, before you can select article.</source>
+        <target>Dieses Inhaltselement muss zuvor gespeichert werden, bevor man einen Artikel auswählen kann.</target>
+
       </trans-unit>
     </body>
   </file>
