@@ -80,28 +80,24 @@ class DefaultRenderer implements EventSubscriberInterface
         /** @var EventDispatcher $eventDispatcher */
         $eventDispatcher = $container['event-dispatcher'];
 
-        $articles = array();
-        foreach ($content->getArticleId() as $articleId) {
-            if (empty($articleId)) {
-                continue;
-            }
+        $targetPage = $GLOBALS['objPage'];
 
+        $articles = array();
+        foreach (array_keys($content->getArticleId()) as $articleId) {
             $getArticleEvent = new GetArticleEvent(
                 $articleId,
                 !$content->getArticleFull(),
                 $content->getCell()
             );
 
-            if (!$content->getArticleFull()) {
-                $article             = ArticleModel::findByPk($articleId);
-                $article->showTeaser = 1;
+            $article = ArticleModel::findByPk($articleId);
 
-                global $objPage;
-                if (!$objPage) {
-                    $objPage = $article->getRelated('pid');
-                    $objPage->loadDetails();
-                }
+            if (!$content->getArticleFull()) {
+                $article->showTeaser = 1;
             }
+
+            $GLOBALS['objPage'] = $article->getRelated('pid');
+            $GLOBALS['objPage']->loadDetails();
 
             $eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GET_ARTICLE, $getArticleEvent);
 
@@ -115,9 +111,11 @@ class DefaultRenderer implements EventSubscriberInterface
         $buffer = '';
         foreach ($articles as $article) {
             $template = new TwigTemplate('avisota/message/renderer/default/mce_article', 'html');
-            $buffer .= $template->parse($article);
+            $buffer   .= $template->parse($article);
         }
 
         $event->setRenderedContent($buffer);
+
+        $GLOBALS['objPage'] = $targetPage;
     }
 }

@@ -4,22 +4,26 @@
       <trans-unit id="orm_avisota_message_content.articleId.0">
         <source>Article</source>
         <target>Artitgel</target>
-        
+
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.articleId.1">
         <source>Please choose the article to include.</source>
         <target>Tscherna l'artitgel per includer.</target>
-        
+
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.articleFull.0">
         <source>Show full article</source>
         <target>Mussar l'entir artitgel</target>
-        
+
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.articleFull.1">
         <source>Show the full article, instead of article teaser.</source>
         <target>Mussar l'entir artitgel empè dal teaser da l'artitgel.</target>
-        
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.article.saveBeforeSelect">
+        <source>You must save this message content, before you can select article.</source>
+
       </trans-unit>
     </body>
   </file>
